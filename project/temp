@@ -1,0 +1,13 @@
+page move
+- 	out.println("<meta http-equiv='Refresh' content='1;URL=master_list.jsp'>");
+
+-   <a href="javascript:history.go(-1)">목록으로 가기</a>
+  // 뒤로 가기
+
+-  response.sendRedirect("normal_list.jsp?pgrade=3");
+
+-
+<script>
+  alert("아이디 없음");
+  history.back();
+</script>
