@@ -26,6 +26,8 @@
   			session.setAttribute("pid", jid);
   			// 로그인이 되면 main.jsp로 이동
   			// sendredirect는 jsp에서 특정 작업을 수행한 후 원하는 페이지로 이동하는 기능
+
+        //로그인이 허용된 id의 등급(dgrade)에 따라 이동 페이지 구분
         if("3".equals(rs.getString("dgrade")))
   			   response.sendRedirect("list.jsp?pgrade=3");
         else if("2".equals(rs.getString("dgrade")))
@@ -49,5 +51,4 @@
         </script>
       <%
   	}
-
   %>

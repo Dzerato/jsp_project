@@ -15,7 +15,6 @@
  String jid = request.getParameter("pid");
  String jfile_temp = "";
  String sql="";
-
  String savePath = "C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/fileupload/files";
  int maxSize = 5 * 1024 * 1024;
 try{
@@ -35,6 +34,7 @@ try{
 	Class.forName(jdbc_driver);
 	 conn=DriverManager.getConnection(jdbc_url,"root","1234");
 
+  // 첨부 파일 보존을 위한 보존 값
    sql = "select dfile from userdata where did ='" + jid + "'";
    pstmt = conn.prepareStatement(sql);
    ResultSet rs = pstmt.executeQuery();
@@ -45,14 +45,13 @@ try{
 
 	sql = "update userdata set dpw=?, dphone=?, demail=?, daddr=?, dhobby=?, dgrade=?, dfile=? where did ='" + jid + "'";
 	pstmt = conn.prepareStatement(sql);
-
 	pstmt.setString(1,multi.getParameter("fpw"));
 	pstmt.setString(2,multi.getParameter("fphone"));
 	pstmt.setString(3,multi.getParameter("femail"));
 	pstmt.setString(4,multi.getParameter("faddr"));
 	pstmt.setString(5,jhobby);
 	pstmt.setString(6,multi.getParameter("fgrade"));
-
+  // 첨부파일 변경 여부 판단을 통해 입력값 수정
   if(jfile != null)
    pstmt.setString(7,jfile);
   else

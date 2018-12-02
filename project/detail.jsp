@@ -64,26 +64,23 @@
 										<td align="center"><%=rs.getString("dgrade")%></td>
 									</tr>
 									<tr>
+										<% //특정 경로(첨부 파일이 저장된 경로)에서 DB(dfile)에 저장된 이름의 파일 호출 %>
 											<td align="center">Image</td>
 											<td align="center"><img src ="../fileupload/files/<%=rs.getString("dfile")%>" width = 150></td>
 									 </tr>
-
 								</table>
-
 								<hr>
+								<% //각 항목별 페이지 이동 - 이동시 해당 페이지에서 필요한 파라미터 값 전달 %>
 									<a href="check_Q.jsp?pid=<%=rs.getString("did")%>&pmode=1">수 정</a>
 									<a href="check_Q.jsp?pid=<%=rs.getString("did")%>&pmode=2">삭 제</a>
-									<a href="javascript:history.go(-1)">목록으로 가기</a>
+									<a href="list.jsp?pgrade=<%=rs.getString("dgrade")%>">목록으로 가기</a>
 								<%
 		}
 		rs.close();
 		pstmt.close();
 		conn.close();
 	}
-	catch(Exception e) {
-		System.out.println(e);
-	}
+	catch(Exception e) {System.out.println(e);}
 %>
-
 									</body>
 								</html>

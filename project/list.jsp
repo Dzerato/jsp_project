@@ -48,6 +48,7 @@
 										<tr>
 											<td align="center"><%=i%></td>
 											<td align="center">
+											<% //검색 id(did)를 파라미터 값(pid)으로 전달하여 페이지(detail.jsp) 이동 %>
 												<a href="detail.jsp?pid=<%=rs.getString("did")%>"><%=rs.getString("did")%></a>
 											</td>
 											<td align="center"><%=rs.getString("dname")%></td>
@@ -68,6 +69,6 @@
 
 										</table>
 										<hr>
-	<a href="main.html">로그아웃</a>
+										<a href="main.html">로그아웃</a>
 										</body>
 									</html>

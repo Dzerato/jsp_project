@@ -7,11 +7,11 @@
       <body>
 
         <%@ page import="com.oreilly.servlet.MultipartRequest"%>
-          <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-            <%@ page import="java.sql.*" %>
-              <% request.setCharacterEncoding("euc-kr"); %>
-                  <center>
-                    <%
+        <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+        <%@ page import="java.sql.*" %>
+        <% request.setCharacterEncoding("euc-kr"); %>
+          <center>
+          <%
     Connection con = null;
     PreparedStatement pstmt = null;
 	  Statement stmt = null;
@@ -29,8 +29,11 @@
   MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "euc-kr", new DefaultFileRenamePolicy());
       String jid = multi.getParameter("fid");
       String jfile = multi.getFilesystemName("ffile"); // 파일의 이름 얻기
+
+      // checkbox를 통해 넘어온 fhobby 파라미터 값을 문자열 1개로 치환(Split : [+])
       String[] values = null;
       String jhobby = "";
+      // 파라미터 값이 null인 경우 공백 입력
       if(multi.getParameterValues("fhobby") != null){
         values = multi.getParameterValues("fhobby");
         jhobby = values[0];
@@ -60,6 +63,7 @@
 
         out.println(pstmt.toString());
     		int rowCount = pstmt.executeUpdate();
+        //데이터 입력 성공 여부에 따른 페이지 이동
         if (rowCount == 1){
           response.sendRedirect("main.html");
         }
@@ -78,10 +82,7 @@
         if(pstmt != null) pstmt.close();
         if(con != null) con.close();
     }
-	// out.println("<meta http-equiv='Refresh' content='1;URL=list.jsp'>");
-
 %>
-
                       <p>
                         <hr></body>
                       </html>

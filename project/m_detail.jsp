@@ -8,26 +8,19 @@
 				<title>상세 정보 조회-관리자</title>
 			</head>
 			<body>
-
 				<% request.setCharacterEncoding("euc-kr"); %>
-
 					<%
 	Connection conn = null;
 	PreparedStatement pstmt = null;
-
 	String jdbc_driver = "com.mysql.jdbc.Driver";
 	String jdbc_url = "jdbc:mysql://localhost:3306/project";
 
 	try{
 		Class.forName(jdbc_driver);
-
 		conn = DriverManager.getConnection(jdbc_url,"root","1234");
-
 		String jid = request.getParameter("pid");
 		String sql = "select did, dpw, dname, dphone, demail, daddr,dhobby, dgrade, dfile from userdata where did = '" + jid + "'";
-
 		pstmt = conn.prepareStatement(sql);
-
 		ResultSet rs = pstmt.executeQuery();
 		while(rs.next()) {
 %>
@@ -68,17 +61,17 @@
 										<td align="center"><%=rs.getString("dgrade")%></td>
 									</tr>
 									<tr>
+					    	<% //특정 경로(첨부 파일이 저장된 경로)에서 DB(dfile)에 저장된 이름의 파일 호출 %>
 										<td align="center">Image</td>
 										<td align="center"><img src ="../fileupload/files/	<%=rs.getString("dfile")%>" width = 150></td>
 									 </tr>
-
 								</table>
 								<hr>
+								<% //각 항목별 페이지 이동 - 이동시 해당 페이지에서 필요한 파라미터 값 전달 %>
 								<a href="m_check_Q.jsp?pid=<%=rs.getString("did")%>&pmode=1">수 정</a>
 								<a href="m_check_Q.jsp?pid=<%=rs.getString("did")%>&pmode=2">삭 제</a>
-								<a href="javascript:history.go(-1)">목록으로 가기</a>
+								<a href="m_list.jsp">목록으로 가기</a>
 								<%
-
 		}
 		rs.close();
 		pstmt.close();
@@ -88,6 +81,5 @@
 		System.out.println(e);
 	}
 %>
-
 									</body>
 								</html>

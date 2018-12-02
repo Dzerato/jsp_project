@@ -8,24 +8,19 @@
 				<title>관리자 확인</title>
 			</head>
 			<body>
-
 				<% request.setCharacterEncoding("euc-kr");
 
 	Connection conn = null;
 	PreparedStatement pstmt = null;
-
 	String jdbc_driver = "com.mysql.jdbc.Driver";
 	String jdbc_url = "jdbc:mysql://localhost:3306/project";
 
 	try{
 		Class.forName(jdbc_driver);
-
 		conn = DriverManager.getConnection(jdbc_url,"root","1234");
-
 		String jid = request.getParameter("pid");
     String jmode = request.getParameter("pmode");
 		String sql = "select did, dname from userdata where dgrade=1";
-
 		pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 					%>
@@ -37,7 +32,7 @@
           								<table border="1">
           									<tr>
           										<td align="center" width="70">ID</td>
-          										<td align="center" width="150"><%=jid%></td>
+          										<td align="center" width="150"><%=rs.getString("did")%></td>
           									</tr>
           									<tr>
           										<td align="center">Name</td>

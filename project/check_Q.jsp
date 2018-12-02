@@ -8,9 +8,7 @@
 				<title>본인 확인</title>
 			</head>
 			<body>
-
 				<% request.setCharacterEncoding("euc-kr");
-
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 
