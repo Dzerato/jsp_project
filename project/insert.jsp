@@ -29,10 +29,16 @@
   MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "euc-kr", new DefaultFileRenamePolicy());
       String jid = multi.getParameter("fid");
       String jfile = multi.getFilesystemName("ffile"); // 파일의 이름 얻기
-      String[] values = multi.getParameterValues("fhobby");
-      String jhobby = values[0];
-      for(int i=1; i<values.length; i++)
-        jhobby = jhobby + "+" + values[i];
+      String[] values = null;
+      String jhobby = "";
+      if(multi.getParameterValues("fhobby") != null){
+        values = multi.getParameterValues("fhobby");
+        jhobby = values[0];
+        for(int i=1; i<values.length; i++)
+          jhobby = jhobby + "+" + values[i];
+      }else
+        jhobby = "";
+
 
 		Class.forName(driverName);
         con = DriverManager.getConnection(dbURL, "root", "1234");

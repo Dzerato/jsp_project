@@ -21,11 +21,16 @@
 try{
   MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "euc-kr", new DefaultFileRenamePolicy());
   String jfile = multi.getFilesystemName("ffile");
-  String[] values = multi.getParameterValues("fhobby");
-  String jhobby=values[0];
 
-  for(int i=1; i<values.length; i++)
-    jhobby = jhobby + "+" + values[i];
+  String[] values = null;
+  String jhobby = "";
+  if(multi.getParameterValues("fhobby") != null){
+    values = multi.getParameterValues("fhobby");
+    jhobby = values[0];
+    for(int i=1; i<values.length; i++)
+      jhobby = jhobby + "+" + values[i];
+  }else
+    jhobby = "";
 
 	Class.forName(jdbc_driver);
 	 conn=DriverManager.getConnection(jdbc_url,"root","1234");
